@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Receta compartida</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f7f7f7;
+        }
+        .receta-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+        p {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        a {
+            color: #0077cc;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="receta-container">
+        <h1 id="titulo">Receta</h1>
+        <p><strong>Ingredientes:</strong> <span id="ingredientes"></span></p>
+        <p><strong>Elaboración:</strong> <span id="elaboracion"></span></p>
+        <p id="youtubeContainer" style="display:none;"><strong>Video:</strong> <a id="youtube" href="#" target="_blank">Ver en YouTube</a></p>
+    </div>
+
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param) || "";
+        }
+
+        const titulo = decodeURIComponent(getQueryParam("titulo"));
+        const ingredientes = decodeURIComponent(getQueryParam("ingredientes"));
+        const elaboracion = decodeURIComponent(getQueryParam("elaboracion"));
+        const youtubeUrl = decodeURIComponent(getQueryParam("youtube"));
+
+        document.getElementById("titulo").innerText = titulo;
+        document.getElementById("ingredientes").innerText = ingredientes;
+        document.getElementById("elaboracion").innerText = elaboracion;
+
+        if(youtubeUrl) {
+            const youtubeLink = document.getElementById("youtube");
+            youtubeLink.href = youtubeUrl;
+            document.getElementById("youtubeContainer").style.display = "block";
+        }
+    </script>
+</body>
+</html>
